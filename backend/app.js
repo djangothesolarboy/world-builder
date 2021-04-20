@@ -6,12 +6,13 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { ValidationError } = require('sequelize');
 
-const { environment } = require('./config');
+const { environment } = require('./config/index');
 const isProduction = environment === 'production';
 
 const routes = require('./routes');
 
 const app = express();
+app.use(cors());
 
 app.use(morgan('dev'));
 
