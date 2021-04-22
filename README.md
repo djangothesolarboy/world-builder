@@ -52,51 +52,9 @@ Database Commands:
 - Apply constraints to migration file ->
     ```
     'use strict';
-    module.exports = {
-    up: (queryInterface, Sequelize) => {
-        return queryInterface.createTable('Users', {
-        id: {
-            allowNull: false,
-            autoIncrement: true,
-            primaryKey: true,
-            type: Sequelize.INTEGER
-        },
-        username: {
-            type: Sequelize.STRING(30),
-            allowNull: false,
-            unique: true,
-        },
-        email: {
-            type: Sequelize.STRING(256),
-            allowNull: false,
-            unique: true,
-        },
-        hashedPassword: {
-            type: Sequelize.STRING.BINARY,
-            allowNull: false,
-        },
-        createdAt: {
-            allowNull: false,
-            type: Sequelize.DATE,
-            defaultValue: Sequelize.fn('now'),
-        },
-        updatedAt: {
-            allowNull: false,
-            type: Sequelize.DATE,
-            defaultValue: Sequelize.fn('now'),
-        }
-        });
-    },
-    down: (queryInterface, Sequelize) => {
-        return queryInterface.dropTable('Users');
-    }
-    };
-    ```
-- Migrate -> `npx dotenv sequelize db:migrate`
-- Apply constraints to model ->
-    ```
-    'use strict';
-    const { Validator } = require('sequelize');
+
+    const { Validator } = require("sequelize");
+    const bcrypt = require('bcryptjs');
 
     module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
@@ -126,13 +84,22 @@ Database Commands:
             len: [60, 60]
         },
         },
-    }, {});
-    // User.associate = function(models) {
-    //     User.hasMany(models.List, {
-    //     foreignKey: 'userId'
-    //     });
-    // };
-
+    },
+        {
+        defaultScope: {
+            attributes: {
+            exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+            },
+        },
+        scopes: {
+            currentUser: {
+            attributes: { exclude: ['hashedPassword'] },
+            },
+            loginUser: {
+            attributes: {},
+            },
+        },
+        });
     User.prototype.toSafeObject = function () {
         const { id, username, email } = this;
         return { id, username, email };
