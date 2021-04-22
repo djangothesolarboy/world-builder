@@ -21,7 +21,7 @@ router.get(
 
 // get character by userId
 router.get(
-    '/:id(\\d+)',
+    '/users/:userId/characters/:charId(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
         const userId = req.user.id;

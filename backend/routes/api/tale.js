@@ -21,7 +21,7 @@ router.get(
 
 // get tale by userId
 router.get(
-    '/:id(\\d+)',
+    '/users/userId/tales/:taleId(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
         const userId = req.user.id;

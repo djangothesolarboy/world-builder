@@ -9,11 +9,11 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 
 // character routes
-router.use('/characters', charRouter);
-router.use('/characters/:id', charRouter);
+router.use('/users/:userId/characters', charRouter);
+router.use('/users/:userId/characters/:charId', charRouter);
 
 // tale routes
-router.use('/tales', taleRouter);
-router.use('/tales/:id', taleRouter);
+router.use('/users/:userId/tales', taleRouter);
+router.use('/users/:userId/tales/:taleId', taleRouter);
 
 module.exports = router;
