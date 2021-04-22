@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const asyncHandler = require("express-async-handler");
-const fetch = require('node-fetch');
 
 const { User, Char } = require('../../db/models');
 const { requireAuth } = require('../../utils/auth');
@@ -10,9 +9,13 @@ const { requireAuth } = require('../../utils/auth');
 router.get(
     '/',
     asyncHandler(async (req, res) => {
-        const char = await Char.findAll();
+        const chars = await Char.findAll({
+            include: User
+        });
 
-        return res.json(char);
+        return res.json({
+            characters: chars
+        });
     }),
 );
 
@@ -23,12 +26,49 @@ router.get(
     asyncHandler(async (req, res) => {
         const userId = req.user.id;
         const charId = parseInt(req.params.id, 10);
-        const chars = await Char.findByPk(charId, {
+        const char = await Char.findByPk(charId, {
             where: {
                 userId: userId
             }
         });
 
-        return res.json(chars);
+        return res.json({ character: char });
     })
 );
+
+// create new character
+router.post(
+    '/',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const { char, userId } = req.body;
+
+        const newChar = await Char.create({
+            char,
+            userId
+        });
+
+        return res.json({
+            char: newChar
+        });
+    }),
+);
+
+// delete character
+router.delete(
+    '/',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const char = await Char.findByPk(req.body.charId, {
+            include: {
+                User
+            }
+        });
+
+        await char.destroy();
+
+        res.json('Character deleted.');
+    })
+);
+
+module.exports = router;
