@@ -21,7 +21,7 @@ router.get(
 
 // get character by userId
 router.get(
-    '/users/:userId/characters/:charId(\\d+)',
+    '/:id(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
         const userId = req.user.id;
@@ -38,25 +38,70 @@ router.get(
 
 // create new character
 router.post(
-    '/',
-    requireAuth,
+    '/new',
     asyncHandler(async (req, res) => {
-        const { char, userId } = req.body;
+        const { 
+            name, bio, userId, 
+            age, gender, height,
+            bodyType, hairColor, race 
+        } = req.body;
 
         const newChar = await Char.create({
-            char,
-            userId
+            name:req.body.name,
+            bio:req.body.bio,
+            userId:req.body.userId,
+            age:req.body.age,
+            gender:req.body.gender,
+            height:req.body.height,
+            bodyType:req.body.bodyType,
+            hairColor:req.body.hairColor,
+            race:req.body.race
         });
 
+        console.log('newChar ---->', newChar)
+
         return res.json({
-            char: newChar
+            character: newChar
+        });
+    }),
+);
+
+// edit character
+router.put(
+    '/new',
+    requireAuth,
+    asyncHandler(async (req, res) => {
+        const char = await Char.findByPk(req.params.id);
+
+        const { 
+            name, bio, userId, 
+            age, gender, height,
+            bodyType, hairColor, race 
+        } = req.body;
+
+        await char.create({
+            name:req.body.name,
+            bio:req.body.bio,
+            userId:req.body.userId,
+            age:req.body.age,
+            gender:req.body.gender,
+            height:req.body.height,
+            bodyType:req.body.bodyType,
+            hairColor:req.body.hairColor,
+            race:req.body.race
+        });
+
+        console.log('update ---->', char)
+
+        return res.json({
+            char
         });
     }),
 );
 
 // delete character
 router.delete(
-    '/',
+    '/:id(\\d+)',
     requireAuth,
     asyncHandler(async (req, res) => {
         const char = await Char.findByPk(req.body.charId, {

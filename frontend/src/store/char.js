@@ -44,40 +44,34 @@ function newChar(character) {
 
 
 export const getAllChars = () => async (dispatch) => {
-    const res = await fetch(`/api/characters`);
+    const res = await fetch(`http://localhost:5000/api/characters`);
     console.log('res ---->', res);
     // dispatch(allChars(res.data.characters));
     // return res;
 }
 
-export const getUserChar = (userId, charId) => async (dispatch) => {
-    const res = await fetch(`/api/users/${userId}/characters/${charId}`);
-    dispatch(userChar(res.data.character));
-    return res;
+export const getUserChar = (charId) => async (dispatch) => {
+    const res = await fetch(`http://localhost:5000/api/characters/${charId}`);
+    console.log('res ---->', res);
+    // dispatch(userChar(res.data.character));
+    // return res;
 }
 
-export const deleteChar = (userId, charId) => async (dispatch) => {
-    const res = await fetch(`/api/characters/`, {
-        method: 'DELETE',
-        body: JSON.stringify({
-            userId,
-            charId
-        })
+export const deleteChar = (id) => async (dispatch) => {
+    const res = await fetch(`http://localhost:5000/api/characters/${id}`, {
+        method: 'DELETE'
     });
-    dispatch(delChar(res));
-    return res;
+    dispatch(delChar(id));
 }
 
-export const createChar = (data) => async (dispatch) => {
-    const { character, userId } = data;
-    const res = await fetch(`/api/characters`, {
+export const createChar = (character) => async (dispatch) => {
+    const res = await fetch(`http://localhost:5000/api/characters/new`, {
         method: 'POST',
-        body: JSON.stringify({
-            character,
-            userId
-        })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(character)
     });
-    return dispatch(newChar(res.data.character));
+    console.log('res ---->', res)
+    // return dispatch(newChar(res.data.character));
 }
 
 
