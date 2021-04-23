@@ -43,7 +43,20 @@ router.post(
         const { 
             name, bio, userId, 
             age, gender, height,
-            bodyType, hairColor, race 
+            bodyType, hairColor, race, 
+            personality, motivation, posture,
+            facialHair, eyes, behavior, 
+            dailyLife, quirks, fatalFlaw, 
+            talents, skills, occupation, 
+            hobbies, wounds, fearOne, 
+            fearTwo, fearThree, fearFour, 
+            fearFive, fearSix, positiveTraits, 
+            negativeTraits, idle, stressed, 
+            exhausted, inebriated, anxious, 
+            distracted, attraction, aroused, 
+            anger, provoke, overreact, 
+            denial, negCoping, posCoping, 
+            outerMot, innerMotGen, innerMotSpec 
         } = req.body;
 
         const newChar = await Char.create({
@@ -55,13 +68,52 @@ router.post(
             height:req.body.height,
             bodyType:req.body.bodyType,
             hairColor:req.body.hairColor,
-            race:req.body.race
+            race:req.body.race,
+            personality:req.body.personality,
+            motivation:req.body.motivation,
+            posture:req.body.posture,
+            facialHair:req.body.facialHair,
+            eyes:req.body.eyes,
+            behavior:req.body.behavior,
+            dailyLife:req.body.dailyLife,
+            quirks:req.body.quirks,
+            fatalFlaw:req.body.fatalFlaw,
+            talents:req.body.talents,
+            skills:req.body.skills,
+            occupation:req.body.occupation,
+            hobbies:req.body.hobbies,
+            wounds:req.body.wounds,
+            fearOne:req.body.fearOne,
+            fearTwo:req.body.fearTwo,
+            fearThree:req.body.fearThree,
+            fearFour:req.body.fearFour,
+            fearFive:req.body.fearFive,
+            fearSix:req.body.fearSix,
+            positiveTraits:req.body.positiveTraits,
+            negativeTraits:req.body.negativeTraits,
+            idle:req.body.idle,
+            stressed:req.body.stressed,
+            exhausted:req.body.exhausted,
+            inebriated:req.body.inebriated,
+            anxious:req.body.anxious,
+            distracted:req.body.distracted,
+            attraction:req.body.attraction,
+            aroused:req.body.aroused,
+            anger:req.body.anger,
+            provoke:req.body.provoke,
+            overreact:req.body.overreact,
+            denial:req.body.denial,
+            negCoping:req.body.negCoping,
+            posCoping:req.body.posCoping,
+            outerMot:req.body.outerMot,
+            innerMotGen:req.body.innerMotGen,
+            innerMotSpec:req.body.innerMotSpec,
         });
 
         console.log('newChar ---->', newChar)
 
         return res.json({
-            character: newChar
+            newChar
         });
     }),
 );
@@ -76,7 +128,20 @@ router.put(
         const { 
             name, bio, userId, 
             age, gender, height,
-            bodyType, hairColor, race 
+            bodyType, hairColor, race, 
+            personality, motivation, posture,
+            facialHair, eyes, behavior, 
+            dailyLife, quirks, fatalFlaw, 
+            talents, skills, occupation, 
+            hobbies, wounds, fearOne, 
+            fearTwo, fearThree, fearFour, 
+            fearFive, fearSix, positiveTraits, 
+            negativeTraits, idle, stressed, 
+            exhausted, inebriated, anxious, 
+            distracted, attraction, aroused, 
+            anger, provoke, overreact, 
+            denial, negCoping, posCoping, 
+            outerMot, innerMotGen, innerMotSpec 
         } = req.body;
 
         await char.create({
@@ -88,7 +153,46 @@ router.put(
             height:req.body.height,
             bodyType:req.body.bodyType,
             hairColor:req.body.hairColor,
-            race:req.body.race
+            race:req.body.race,
+            personality:req.body.personality,
+            motivation:req.body.motivation,
+            posture:req.body.posture,
+            facialHair:req.body.facialHair,
+            eyes:req.body.eyes,
+            behavior:req.body.behavior,
+            dailyLife:req.body.dailyLife,
+            quirks:req.body.quirks,
+            fatalFlaw:req.body.fatalFlaw,
+            talents:req.body.talents,
+            skills:req.body.skills,
+            occupation:req.body.occupation,
+            hobbies:req.body.hobbies,
+            wounds:req.body.wounds,
+            fearOne:req.body.fearOne,
+            fearTwo:req.body.fearTwo,
+            fearThree:req.body.fearThree,
+            fearFour:req.body.fearFour,
+            fearFive:req.body.fearFive,
+            fearSix:req.body.fearSix,
+            positiveTraits:req.body.positiveTraits,
+            negativeTraits:req.body.negativeTraits,
+            idle:req.body.idle,
+            stressed:req.body.stressed,
+            exhausted:req.body.exhausted,
+            inebriated:req.body.inebriated,
+            anxious:req.body.anxious,
+            distracted:req.body.distracted,
+            attraction:req.body.attraction,
+            aroused:req.body.aroused,
+            anger:req.body.anger,
+            provoke:req.body.provoke,
+            overreact:req.body.overreact,
+            denial:req.body.denial,
+            negCoping:req.body.negCoping,
+            posCoping:req.body.posCoping,
+            outerMot:req.body.outerMot,
+            innerMotGen:req.body.innerMotGen,
+            innerMotSpec:req.body.innerMotSpec,
         });
 
         console.log('update ---->', char)

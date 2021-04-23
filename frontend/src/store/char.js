@@ -64,14 +64,15 @@ export const deleteChar = (id) => async (dispatch) => {
     dispatch(delChar(id));
 }
 
-export const createChar = (character) => async (dispatch) => {
+export const createChar = (newChar) => async (dispatch) => {
     const res = await fetch(`http://localhost:5000/api/characters/new`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(character)
+        body: JSON.stringify(newChar)
     });
     console.log('res ---->', res)
-    return dispatch(newChar(res.data.character));
+    dispatch(newChar(res.data.newChar));
+    return res.data.newChar;
 }
 
 
@@ -80,7 +81,7 @@ const charReducer = (state = { characters: {}, character: {} }, action) => {
     let newState;
     switch (action.type) {
         case GET_CHARS:
-            return { ...state, characers: action.payload };
+            return { ...state, characters: action.payload };
         case USER_CHAR:
             return { ...state, character: action.payload};
         case NEW_CHAR:

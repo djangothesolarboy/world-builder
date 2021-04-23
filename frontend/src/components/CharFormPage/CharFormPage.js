@@ -7,7 +7,7 @@ import './CharFormPage.css';
 import { createChar } from '../../store/char';
 
 function CharFormPage() {
-    const userId = useSelector((state) => state.session.user);
+    const userId = useSelector((state) => state.session.user.id);
     const dispatch = useDispatch();
 
     const [state, setState] = useState({
@@ -67,7 +67,7 @@ function CharFormPage() {
         dispatch(createChar({
             name:state.name, 
             bio:state.bio, 
-            userId:userId.id,
+            userId:userId,
             age:state.age, 
             gender:state.gender, 
             height:state.height,
@@ -114,8 +114,8 @@ function CharFormPage() {
             innerMotGen:state.innerMotGen,
             innerMotSpec:state.innerMotSpec
         }));
-        console.log('user -->', userId)
-        setRedirect(true);
+        console.log('characterrrr ->', state)
+        // setRedirect(true);
     }
 
     if (redirect) {
