@@ -7,7 +7,7 @@ import './CharFormPage.css';
 import { createChar } from '../../store/char';
 
 function CharFormPage() {
-    const userId = useSelector((state) => state.session.user.id);
+    const userId = useSelector((state) => state.session.user);
     const dispatch = useDispatch();
 
     const [state, setState] = useState({
@@ -28,7 +28,7 @@ function CharFormPage() {
         dispatch(createChar({
             name:state.name, 
             bio:state.bio, 
-            userId:userId,
+            userId:userId.id,
             age:state.age, 
             gender:state.gender, 
             height:state.height,
@@ -37,7 +37,7 @@ function CharFormPage() {
             race:state.race 
         }));
         console.log('user -->', userId)
-        // setRedirect(true);
+        setRedirect(true);
     }
 
     if (redirect) {

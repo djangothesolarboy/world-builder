@@ -71,7 +71,7 @@ export const createChar = (character) => async (dispatch) => {
         body: JSON.stringify(character)
     });
     console.log('res ---->', res)
-    // return dispatch(newChar(res.data.character));
+    return dispatch(newChar(res.data.character));
 }
 
 
