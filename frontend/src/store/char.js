@@ -1,7 +1,7 @@
 const GET_CHARS = 'chars/all';
 const USER_CHAR = 'char/one';
 const DEL_CHAR = 'char/del';
-// const EDIT_CHAR = 'char/edit';
+const EDIT_CHAR = 'char/edit';
 const NEW_CHAR = 'char/new';
 
 
@@ -27,12 +27,12 @@ function delChar(character) {
     }
 }
 
-// function editChar(character) {
-//     return {
-//         type: EDIT_CHAR,
-//         payload: character
-//     }
-// }
+function editChar(character) {
+    return {
+        type: EDIT_CHAR,
+        payload: character
+    }
+}
 
 function newChar(character) {
     return {
@@ -64,15 +64,19 @@ export const deleteChar = (id) => async (dispatch) => {
     dispatch(delChar(id));
 }
 
-export const createChar = (newChar) => async (dispatch) => {
+export const createChar = (newChara) => async (dispatch) => {
+    const {
+        name, bio, userId, age, gender, height, bodyType, hairColor, race, personality, motivation, posture, facialHair, eyes, behavior, dailyLife, quirks, fatalFlaw, talents, skills, occupation, hobbies, wounds, fearOne, fearTwo, fearThree, fearFour, fearFive, fearSix, positiveTraits, negativeTraits, idle, stressed, exhausted, inebriated, anxious, distracted, attraction, aroused, anger, provoke, overreact, denial, negCoping, posCoping, outerMot, innerMotGen, innerMotSpec
+    } = newChara;
+
     const res = await fetch(`http://localhost:5000/api/characters/new`, {
-        method: 'POST',
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newChar)
+        body: JSON.stringify({
+            name, bio, userId, age, gender, height, bodyType, hairColor, race, personality, motivation, posture, facialHair, eyes, behavior, dailyLife, quirks, fatalFlaw, talents, skills, occupation, hobbies, wounds, fearOne, fearTwo, fearThree, fearFour, fearFive, fearSix, positiveTraits, negativeTraits, idle, stressed, exhausted, inebriated, anxious, distracted, attraction, aroused, anger, provoke, overreact, denial, negCoping, posCoping, outerMot, innerMotGen, innerMotSpec
+        })
     });
-    console.log('res ---->', res)
-    dispatch(newChar(res.data.newChar));
-    return res.data.newChar;
+    return dispatch(newChar(newChara));
 }
 
 
