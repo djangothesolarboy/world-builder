@@ -5,7 +5,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import CharPage from "./components/CharPage/CharPage";
+import UserCharPage from "./components/UserCharPage/UserCharPage";
 import CharFormPage from "./components/CharFormPage/CharFormPage";
 
 function App() {
@@ -29,6 +29,9 @@ function App() {
 						</Route>
 						<Route path="/characters/new">
 							<CharFormPage />
+						</Route>
+						<Route path={`/characters/21`}>
+							<UserCharPage />
 						</Route>
 					</Switch>
 				</>

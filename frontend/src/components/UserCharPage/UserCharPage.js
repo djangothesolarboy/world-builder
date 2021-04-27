@@ -5,9 +5,9 @@ import { Redirect, useParams } from 'react-router-dom';
 
 import * as charActions from '../../store/char';
 
-import './CharPage.css';
+import './UserCharPage.css';
 
-function CharPage({ data }) {
+function UserCharPage({ data }) {
     const dispatch = useDispatch();
     const { charId } = useParams();
 
@@ -33,17 +33,12 @@ function CharPage({ data }) {
     return (
         <div className='char-page-container'>
             <div className='char'>
-                <p>Lorem ipsum</p>
-                <form>
-                    <label>
-                        Input:
-                        <input name='input' type='text'></input>
-                    </label>
-                    <button>Button</button>
-                </form>
+                <p>
+                    {/* {char.name} */}
+                </p>
             </div>
         </div>
     )
 }
 
-export default CharPage;
+export default UserCharPage;

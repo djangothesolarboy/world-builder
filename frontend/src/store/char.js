@@ -27,12 +27,12 @@ function delChar(character) {
     }
 }
 
-function editChar(character) {
-    return {
-        type: EDIT_CHAR,
-        payload: character
-    }
-}
+// function editChar(character) {
+//     return {
+//         type: EDIT_CHAR,
+//         payload: character
+//     }
+// }
 
 function newChar(character) {
     return {
@@ -51,10 +51,10 @@ export const getAllChars = () => async (dispatch) => {
 }
 
 export const getUserChar = (charId) => async (dispatch) => {
-    const res = await fetch(`http://localhost:5000/api/characters/${charId}`);
+    const res = await fetch(`http://localhost:5000/api/characters/21`);
     console.log('res ---->', res);
-    // dispatch(userChar(res.data.character));
-    // return res;
+    dispatch(userChar(res.data.character));
+    return res;
 }
 
 export const deleteChar = (id) => async (dispatch) => {

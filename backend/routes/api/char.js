@@ -25,14 +25,16 @@ router.get(
     requireAuth,
     asyncHandler(async (req, res) => {
         const userId = req.user.id;
-        const charId = parseInt(req.params.id, 10);
+        const charId = 21;
+        // const charId = parseInt(req.params.id, 10);
         const char = await Char.findByPk(charId, {
             where: {
                 userId: userId
             }
         });
 
-        return res.json({ character: char });
+        console.log('char -->', char)
+        return res.json(char);
     })
 );
 

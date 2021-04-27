@@ -16,8 +16,10 @@ function Navigation({ isLoaded }){
     sessionLinks = (
       <>
         <NavLink to='/characters/new'>New Character</NavLink>
+        <NavLink to={`/characters/21`}>
+        Char 21
+        </NavLink>
         <ProfileButton user={sessionUser} />
-          {/* <CharPage/> */}
       </>
     );
   } else {
